@@ -24,7 +24,20 @@
                 <td>{{ company.code }}</td>
                 <td>{{ company.title }}</td>
                 <td>{{ company.description }}</td>
-                <td>{% for categ in company.categories %}{{ categ.title }}{% else %}No categories{% endfor %}</td>
+                <td>
+                    {% if company.categories|length %}
+                    <ul>
+                        {% for categ in company.categories %}
+                        <li>
+                            {{ categ.title }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No categories
+                        {% endif %}
+                </td>
+
                 <td>{{ company.medias|first ? (company.medias|first).url }}</td>
                 <td>
                     <a class="btn btn-outline-primary" href="{{ path('backend_company_show', {'id': company.id}) }}">Show</a>
